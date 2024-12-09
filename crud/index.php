@@ -4,22 +4,6 @@
     <meta charset="UTF-8">
     <title>Document</title>
 </head>
-<body>
-   
-    <form action="add.php" method="POST">
-       
-        <input type="text" name="name" placeholder="Name"><br>
-        <input type="text" name="username" placeholder="Username"><br>
-        <input type="email" name="email" placeholder="Email"><br><br>
-        <button type="submit" name="submit">Add</button>
- 
-    </form>
- 
- 
- 
- 
-</body>
-
 </html>
  
 
@@ -71,7 +55,7 @@ $users = $getUsers ->fetchAll();
                 <td> <?= $user['name']?> </td>
                 <td> <?= $user['username']?> </td>
                 <td> <?= $user['email']?> </td>
-                <td> <?= "<a href='delete.php?id=$user[id]'>Delete</a> | <a href='edit.php?id=$user[id]'> Update </a>"?> </td>
+                <td> <?= "<a href='delete.php?id=$user[id]'>Delete | <a href='edit.php?id=$user[id]'>Update </a>" ?> </td>
             </tr>
     <?php
         }
