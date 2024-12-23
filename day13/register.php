@@ -17,7 +17,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
             $error="Username or email already exists";
         }else{
             $hashed_password=md5($password);
-            $sql="INSERT INTO users(username,email,password) VALUES ('$username','$email','$hashed_password')"
+            $sql="INSERT INTO users(username,email,password) VALUES ('$username','$email','$hashed_password')";
             if($conn->query($sql)===TRUE){
                 $success="Registration successful! You can now <a href='login.php'>Login Here </a>.";
             }else{
