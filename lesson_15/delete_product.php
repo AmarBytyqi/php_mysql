@@ -1,7 +1,7 @@
 <?php
 $servername = "localhost";
-$username = "username";  // Replace with your database username
-$password = "password";  // Replace with your database password
+$username = "root";  // Replace with your database username
+$password = "";  // Replace with your database password
 $dbname = "products_management"; // Database name
 
 // Create connection
