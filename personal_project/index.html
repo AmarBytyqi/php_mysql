@@ -12,16 +12,9 @@
     <div class="container">
         <h1>Cryptocurrency Tracker</h1>
         
-        <div class="crypto-card" id="crypto-card">
-            <h2>Bitcoin</h2>
-            <p><strong>Current Price:</strong> $<span id="current-price">Loading...</span></p>
-            <p><strong>Market Cap:</strong> $<span id="market-cap">Loading...</span></p>
-            <p><strong>24h Volume:</strong> $<span id="volume">Loading...</span></p>
-            <p><strong>Circulating Supply:</strong> <span id="supply">Loading...</span></p>
-            <button id="update-btn">Update Data</button>
-        </div>
-
-        <canvas id="priceChart" width="400" height="200"></canvas>
+        <!-- Crypto Cards for each coin will be added dynamically -->
+        <div id="crypto-container"></div>
+        
     </div>
 
     <script src="scripts.js"></script>

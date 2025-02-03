@@ -10,7 +10,7 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Fetch data from CoinGecko API
+// Function to fetch data from CoinGecko API
 function fetchCryptoData($crypto_id) {
     $url = "https://api.coingecko.com/api/v3/coins/{$crypto_id}";
     $json = file_get_contents($url);
@@ -26,7 +26,7 @@ function fetchCryptoData($crypto_id) {
     ];
 }
 
-// Insert data into database
+// Function to insert data into the database
 function saveCryptoData($data) {
     global $conn;
     $stmt = $conn->prepare("INSERT INTO cryptocurrencies (name, symbol, current_price, market_cap, volume, supply) VALUES (?, ?, ?, ?, ?, ?)");
@@ -43,9 +43,13 @@ function saveCryptoData($data) {
     $stmt->close();
 }
 
-// Example: Fetch and save Bitcoin data
-$crypto_data = fetchCryptoData("bitcoin");
-saveCryptoData($crypto_data);
+// Fetch and save data for Bitcoin and Ethereum
+$cryptos = ['bitcoin', 'ethereum'];  // Add more coins here if needed
+
+foreach ($cryptos as $crypto_id) {
+    $crypto_data = fetchCryptoData($crypto_id);
+    saveCryptoData($crypto_data);
+}
 
 // Close the database connection
 $conn->close();
