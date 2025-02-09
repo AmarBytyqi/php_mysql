@@ -19,7 +19,18 @@ if ($conn->connect_error) {
 // Fetch cryptocurrency data from CoinGecko API
 $apiUrl = 'https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,ripple,litecoin,cardano&vs_currencies=usd&include_market_cap=true&include_24hr_change=true';
 $response = file_get_contents($apiUrl);
+
+// Check if the API call was successful
+if ($response === FALSE) {
+    die("Error fetching data from CoinGecko API.");
+}
+
 $cryptoData = json_decode($response, true);
+
+// Check if the data was decoded successfully
+if ($cryptoData === NULL) {
+    die("Error decoding JSON data.");
+}
 
 // Insert or update cryptocurrency data in the database
 foreach ($cryptoData as $crypto => $data) {
@@ -27,9 +38,16 @@ foreach ($cryptoData as $crypto => $data) {
     $marketCap = $data['usd_market_cap'];
     $change = $data['usd_24h_change'];
 
-    // Check if the cryptocurrency already exists in the database
-    $stmt = $conn->prepare("INSERT INTO cryptocurrencies (name, price, market_cap, change) VALUES (?, ?, ?, ?) ON DUPLICATE KEY UPDATE price=?, market_cap=?, change=?");
-    $stmt->bind_param("sddddd", $crypto, $price, $marketCap, $change, $price, $marketCap, $change);
+    // Prepare the SQL statement
+    $stmt = $conn->prepare("INSERT INTO cryptocurrencies (name, price, market_cap) VALUES (?, ?, ?) ON DUPLICATE KEY UPDATE price=?, market_cap=?, price_change=?");
+    
+    // Check if the statement was prepared successfully
+    if (!$stmt) {
+        die("Prepare failed: " . $conn->error);
+    }
+
+    // Bind parameters
+    $stmt->bind_param("sddddd", $crypto, $price, $marketCap, $price, $marketCap, $change);
     $stmt->execute();
 }
 
@@ -74,7 +92,7 @@ $conn->close();
                     <h5 class="card-title text-center"><?php echo ucfirst($crypto['name']); ?></h5>
                     <p class="card-text">Current Price: $<?php echo number_format($crypto['price'], 2); ?></p>
                     <p class="card-text">Market Cap: $<?php echo number_format($crypto['market_cap'], 2); ?></p>
-                    <p class="card-text">24h Change: <?php echo number_format($crypto['change'], 2); ?>%</p>
+                    <p class="card-text">24h Change: <?php echo number_format($crypto['price_change'], 2); ?>%</p>
                 </div>
             </div>
         <?php endforeach; ?>
