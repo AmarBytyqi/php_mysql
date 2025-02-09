@@ -82,7 +82,7 @@ $conn->close();
         <?php if ($error_message): ?>
             <div class="alert alert-danger"> <?php echo $error_message; ?> </div>
         <?php endif; ?>
-        <form action="signup.php" method="POST">
+        <form action="sign_up.php" method="POST">
             <div class="mb-3">
                 <label for="username" class="form-label">Username:</label>
                 <input type="text" class="form-control" id="username" name="username" required>
