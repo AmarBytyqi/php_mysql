@@ -3,7 +3,7 @@
 session_start();
 
 // Database connection
-$conn = new mysqli('localhost', 'root', '', 'crypto_users');
+$conn = new mysqli('localhost', 'root', '', 'crypto_db');
 
 // Check connection
 if ($conn->connect_error) {
