@@ -55,7 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $stmt->bind_param("sss", $username, $email, $hashed_password);
 
             if ($stmt->execute()) {
-                header("Location: signin.php"); // Redirect to sign-in page
+                header("Location: sign_in.php"); // Redirect to sign-in page
                 exit();
             } else {
                 $error_message = "Error registering user: " . $stmt->error;
@@ -74,6 +74,114 @@ $conn->close();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign Up</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Background Gradient */
+        body {
+            background: linear-gradient(180deg, #f0faff, #e6f7ff);
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            color: #333;
+        }
+
+        /* Card Styling */
+        .card {
+            width: 100%;
+            max-width: 400px;
+            padding: 30px;
+            border-radius: 15px;
+            background-color: #ffffff;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        /* Card Header */
+        .card-header {
+            background-color: #ffffff;
+            color: #0072ff;
+            text-align: center;
+            font-size: 26px;
+            padding: 20px;
+            border-radius: 10px 10px 0 0;
+        }
+
+        /* Input Fields */
+        .form-control {
+            border-radius: 10px;
+            padding: 12px;
+            font-size: 16px;
+            border: 2px solid #ccc;
+            background-color: #f9f9f9;
+            color: #333;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            border-color: #0072ff;
+            box-shadow: 0 0 5px rgba(0, 114, 255, 0.5);
+        }
+
+        /* Button Styling */
+        .btn-primary {
+            background-color: #0072ff;
+            border: none;
+            border-radius: 25px;
+            padding: 12px;
+            font-size: 18px;
+            width: 100%;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: #005cbf;
+        }
+
+        /* Error Message Styling */
+        .alert-danger {
+            background-color: rgba(255, 0, 0, 0.1);
+            color: #d32f2f;
+            border-radius: 10px;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+
+        /* Footer with link */
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            color: #0072ff;
+        }
+
+        .footer a {
+            color: #0072ff;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Animations */
+        .card-header, .form-control, .btn-primary {
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
 </head>
 <body>
 <div class="container d-flex justify-content-center align-items-center vh-100">
